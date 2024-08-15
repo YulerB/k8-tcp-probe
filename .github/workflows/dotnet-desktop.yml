@@ -14,10 +14,10 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 8.0.x
     - name: Restore dependencies
       working-directory: src
-      run: dotnet restore
+      run: dotnet restore k8-tcp-probe.sln
     - name: Build
       working-directory: src
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build k8-tcp-probe.sln --no-restore --configuration Release
