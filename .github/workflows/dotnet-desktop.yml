@@ -21,7 +21,7 @@ jobs:
         
     - name: Restore dependencies
       working-directory: src
-      run: dotnet restore k8-tcp-probe.sln
+      run: dotnet restore
     - name: Build
       working-directory: src
-      run: dotnet build k8-tcp-probe.sln --no-restore --configuration Release
+      run: dotnet build --no-restore --configuration Release
