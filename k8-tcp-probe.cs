@@ -25,14 +25,14 @@ namespace K8
     }
 
     public void StartProbeAsync(int port = 25000){
-      this.StartProbeAsync(new IPEndPoint(IPAddress.Any, port));
+      this.ThrowIfDisposed();
+      this.listener.Bind(new IPEndPoint(IPAddress.Any, port));
+      this.listener.Listen(4);
+      this.listener.BeginAccept(this.callback, null);
     }    
 
     public void StopProbeAsync(){
-      if(this.disposedValue){
-        throw new ObjectDisposedException(this.GetType().Name);
-      }
-
+      this.ThrowIfDisposed();
       this.listener?.Dispose();      
     }
 
@@ -52,17 +52,9 @@ namespace K8
           this.disposedValue = true;
         }
       }
-     } 
-    }
-
-    private void StartProbeAsync(EndPoint endPoint){
-      if(this.disposedValue){
-        throw new ObjectDisposedException(this.GetType().Name);
-      }
-
-      this.listener.Bind(endPoint);
-      this.listener.Listen(4);
-      this.listener.BeginAccept(this.callback, null);
+     }else{
+      this.logger?.LogInformation(Resources.ListenerDisposed);
+     }
     }
     
     private void SafeDisposeOfListener(){
@@ -71,6 +63,12 @@ namespace K8
       }
       catch(ObjectDisposedException){
         // Do nothing, already called.    
+      }
+    }
+
+    private void ThrowIfDisposed(){
+      if(this.disposedValue){
+        throw new ObjectDisposedException(this.GetType().Name);
       }
     }
 
@@ -91,20 +89,20 @@ namespace K8
           lock(this.syncObject){
             if(!this.disposedValue){
               this.logger?.LogInformation(Resources.AcceptingConnection);
-
               try{
                 this.connectedSocket = this.listener?.EndAccept(result);
+                this.logger?.LogInformation(Resources.AcceptedConnection);
               }
               catch(ObjectDisposedException){
                 // Do nothing, already called.
               }
-
-              this.logger?.LogInformation(Resources.AcceptingConnection);
             }
             else{
               this.logger?.LogInformation(Resources.ListenerDisposed);
             }
           }
+        }else{
+          this.logger?.LogInformation(Resources.ListenerDisposed);
         }
       }
       finally{
@@ -119,6 +117,8 @@ namespace K8
               catch(ObjectDisposedException){
                 // Do nothing, already called.
               }
+            }else{
+              this.logger?.LogInformation(Resources.ListenerDisposed);
             }
           }
         }
@@ -130,6 +130,7 @@ namespace K8
       public static readonly string ListenerDisposed = "Listener Disposed";
       public static readonly string BeginAcceptingConnection = "Begin Accepting Connection";
       public static readonly string AcceptingConnection = "Accepting Connection";      
+      public static readonly string AcceptedConnection = "Accepted Connection";      
     }
   }
 }
