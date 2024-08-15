@@ -46,19 +46,8 @@ namespace K8
       lock(this.syncObject){
         if(!this.disposedValue){
           if(disposing){
-            try{
-              this.connectedSocket?.Dispose();
-            }
-            catch(ObjectDisposedException){
-              // Do nothing, already called.
-            }
-
-            try{
-             this.listener?.Dispose();
-            }
-            catch(ObjectDisposedException){
-              // Do nothing, already called.    
-            }
+            this.SafeDisposeOfConnectedSocket();
+            this.SafeDisposeOfListener();
           }
           this.disposedValue = true;
         }
@@ -75,15 +64,28 @@ namespace K8
       this.listener.Listen(4);
       this.listener.BeginAccept(this.callback, null);
     }
+    
+    private void SafeDisposeOfListener(){
+      try{
+        this.listener?.Dispose();
+      }
+      catch(ObjectDisposedException){
+        // Do nothing, already called.    
+      }
+    }
 
-    private void OnAccept(IAsyncResult result){
+    private void SafeDisposeOfConnectedSocket(){
       try{
         this.connectedSocket?.Dispose();
       }
       catch(ObjectDisposedException){
         // Do nothing, already called.
       }
-      
+    }
+
+    private void OnAccept(IAsyncResult result){
+      this.SafeDisposeOfConnectedSocket();
+   
       try{
         if(!this.disposedValue){
           lock(this.syncObject){
