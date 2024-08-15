@@ -28,7 +28,3 @@ jobs:
       run: dotnet nuget push "bin/Release/K8-TCP-Probe.1.0.0.nupkg"  --source "https://api.nuget.org/v3/index.json"  --skip-duplicate --api-key ${NUGET_TOKEN} 
       env:
         NUGET_TOKEN: ${{ secrets.NUGET_API_KEY }}
-    - name: PushGit
-      run: dotnet nuget push "bin/Release/K8-TCP-Probe.1.0.0.nupkg" --source "https://nuget.pkg.github.com/K8-TCP-Probe/index.json"   --skip-duplicate --api-key ${GITHUB_TOKEN} 
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
