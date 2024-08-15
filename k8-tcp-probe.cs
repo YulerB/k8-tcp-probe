@@ -8,8 +8,8 @@ namespace K8
   public class TcpProbe : IDisposable
   {
     private readonly AsyncCallback callback;
-    private readonly object syncObject = new ();
-    private readonly Socket listener = new (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+    private readonly object syncObject = new object();
+    private readonly Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
     private readonly ILogger<TcpProbe>? logger;
     private bool disposedValue = false;
     private Socket? connectedSocket;
