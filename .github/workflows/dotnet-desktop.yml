@@ -18,26 +18,10 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x     
-    - name: Install Java 11
-      uses: actions/setup-java@v1
-      with: 
-        java-version: '11'        
-    - name: Install SonarScanner
-      run: dotnet tool install dotnet-sonarscanner --global
     - name: Restore dependencies
       run: dotnet restore
-    - name: Sonar Begin
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: dotnet-sonarscanner begin /k:"YulerB_K8-TCP-Probe" /o:"yulerb" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vstest.reportsPaths=**/*.trx /d:sonar.cs.opencover.reportsPaths=**/coverage.opencover.xml /v:1.0.1.${{ github.run_number }} /d:sonar.links.ci=https://github.com/YulerB/k8-tcp-probe/actions/runs/${{ github.run_id }} /d:sonar.links.scm=https://github.com/YulerB/k8-tcp-probe
     - name: Build
       run: dotnet build --no-restore --configuration Release
-    - name: Sonar End
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}" 
     - name: Pack
       run: dotnet pack --configuration Release
     - name: PushNuget
