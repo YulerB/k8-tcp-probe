@@ -9,7 +9,6 @@
         <Company>Brian Yule</Company>
         <Nullable>enable</Nullable>
         <PackageDescription>TCP Probe for use with Kubernetes.</PackageDescription>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
     <ItemGroup>
