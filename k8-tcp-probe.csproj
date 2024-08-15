@@ -10,7 +10,11 @@
         <Nullable>enable</Nullable>
         <PackageDescription>TCP Probe for use with Kubernetes.</PackageDescription>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
+    <ItemGroup>
+        <None Include="LICENSE Pack="true" PackagePath=""/>
+    </ItemGroup>
     <ItemGroup>
         <PackageReference Include="SonarAnalyzer.CSharp" Version="8.29.0.36737">
             <PrivateAssets>all</PrivateAssets>
