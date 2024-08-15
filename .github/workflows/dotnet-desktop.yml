@@ -1,4 +1,4 @@
-name: .NET NUGET PACKAGE
+name: .NET BUILD PACKAGE
 
 on:
   push:
