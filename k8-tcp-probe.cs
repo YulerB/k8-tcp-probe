@@ -1,4 +1,3 @@
-
 namespace K8
 {
   using System;
@@ -18,7 +17,7 @@ namespace K8
     public TcpProbe(){
       this.callback = new AsyncCallback(this.OnAccept);
     }
-    
+
     public TcpProbe(ILogger<TcpProbe> logger)
       : this()
     {
