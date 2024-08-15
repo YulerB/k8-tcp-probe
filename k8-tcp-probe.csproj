@@ -13,7 +13,7 @@
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="LICENSE Pack="true" PackagePath=""/>
+        <None Include="LICENSE" Pack="true" PackagePath=""/>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="SonarAnalyzer.CSharp" Version="8.29.0.36737">
