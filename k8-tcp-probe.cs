@@ -50,6 +50,8 @@ namespace K8
             this.SafeDisposeOfListener();
           }
           this.disposedValue = true;
+        }else{
+         this.logger?.LogInformation(Resources.ListenerDisposed);
         }
       }
      }else{
@@ -121,6 +123,8 @@ namespace K8
               this.logger?.LogInformation(Resources.ListenerDisposed);
             }
           }
+        }else{
+          this.logger?.LogInformation(Resources.ListenerDisposed);
         }
       }
     }
