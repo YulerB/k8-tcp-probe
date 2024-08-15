@@ -9,6 +9,7 @@
         <Company>Brian Yule</Company>
         <Nullable>enable</Nullable>
         <PackageDescription>TCP Probe for use with Kubernetes.</PackageDescription>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="SonarAnalyzer.CSharp" Version="8.29.0.36737">
