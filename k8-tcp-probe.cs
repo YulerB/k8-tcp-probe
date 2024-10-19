@@ -5,7 +5,7 @@ namespace K8
   using System.Net.Sockets;
   using Microsoft.Extensions.Logging;
 
-  public class TcpProbe : IDisposable
+  public sealed class TcpProbe : IDisposable
   {
     private readonly AsyncCallback callback;
     private readonly object syncObject = new object();
@@ -41,7 +41,7 @@ namespace K8
       GC.SuppressFinalize(this);
     }
 
-    protected virtual void Dispose(bool disposing){
+    private void Dispose(bool disposing){
      if(!this.disposedValue){
       lock(this.syncObject){
         if(!this.disposedValue){

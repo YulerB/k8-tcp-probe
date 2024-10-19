@@ -8,8 +8,13 @@
         <Version>1.0.0</Version>
         <Company>Brian Yule</Company>
         <Nullable>enable</Nullable>
+        <RepositoryUrl>https://github.com/YulerB/k8-tcp-probe</RepositoryUrl>
+        <ProjectGuid>{4FB8683E-AC3C-494C-BADC-E7600A99195B}</ProjectGuid>
         <PackageDescription>TCP Probe for use with Kubernetes.</PackageDescription>
     </PropertyGroup>
+    <ItemGroup>
+      <Content Include=".\LICENSE" />
+    </ItemGroup>
     <ItemGroup>
         <PackageReference Include="SonarAnalyzer.CSharp" Version="8.29.0.36737">
             <PrivateAssets>all</PrivateAssets>
